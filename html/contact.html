@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Contact</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
+{% extends 'base.html' %}
 
-<nav>
-    <a href="/">Home</a>
-</nav>
+{% block content %}
+
 
 <h2>Contact</h2>
 
@@ -20,6 +12,4 @@
     <button type="submit">Send</button>
 </form>
 
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
-</body>
-</html>
+{% endblock %}

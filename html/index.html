@@ -1,40 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <title>Message in a Bottle</title>
-    <meta name="description"
-        content="">
-    <meta name="author" content="Anna Keil">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="responsive.css">
-</head>
-
-<body>
-<nav>
-    <a href="/">Home</a>
-    <a href="/submit">Send</a>
-    <a href="/receive">Receive</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
-</nav>
+{% block content %}
 
 <h1>🌊 Message in a Bottle</h1>
 <p>Send anonymous messages and receive inspiration from strangers.</p>
 
+<p>{{content}}</p>
 <a href="/submit"><button>Send a Message</button></a>
 <a href="/receive"><button>Open a Bottle</button></a>
 
 <div id="timer"></div>
 
-<footer>
-    <p>🌊 Message in a Bottle App</p>
-</footer>
-
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
-</body>
-
-</html>
+{% endblock %}

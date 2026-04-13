@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <title>Message in a Bottle</title>
+    <meta name="description"
+        content="">
+    <meta name="author" content="Anna Keil">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="responsive.css">
+</head>
+
+<body>
+<nav>
+    <a href="/">Home</a>
+    <a href="/submit">Send</a>
+    <a href="/receive">Receive</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+</nav>
+
+<div class="content"> {% block content %} {% endblock %} </div>
+
+<footer>
+    <p>🌊 Message in a Bottle App</p>
+</footer>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
