@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Send Message</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav>
+    <a href="/">Home</a>
+</nav>
+
+<h2>Send Your Bottle Message</h2>
+
+<form method="POST">
+    <textarea name="message" placeholder="Write your message..." required></textarea><br>
+    <button type="submit">Send Bottle 🌊</button>
+</form>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
