@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #4facfe, #00f2fe);
+    color: white;
+    text-align: center;
+}
+
+nav {
+    background: rgba(0,0,0,0.2);
+    padding: 15px;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+textarea, input {
+    width: 60%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+button {
+    margin-top: 15px;
+    background: #ff7e5f;
+    border: none;
+    padding: 12px 25px;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.message-box {
+    margin: 40px auto;
+    padding: 20px;
+    width: 60%;
+    background: rgba(255,255,255,0.2);
+    border-radius: 15px;
+}
