@@ -14,7 +14,27 @@
 </head>
 
 <body>
+<nav>
+    <a href="/">Home</a>
+    <a href="/submit">Send</a>
+    <a href="/receive">Receive</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+</nav>
 
+<h1>🌊 Message in a Bottle</h1>
+<p>Send anonymous messages and receive inspiration from strangers.</p>
+
+<a href="/submit"><button>Send a Message</button></a>
+<a href="/receive"><button>Open a Bottle</button></a>
+
+<div id="timer"></div>
+
+<footer>
+    <p>🌊 Message in a Bottle App</p>
+</footer>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>
