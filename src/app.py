@@ -1,10 +1,29 @@
 from flask import Flask, render_template, request, redirect, url_for
-import random
+import random, json
 from datetime import datetime
 
 app = Flask(__name__, template_folder='../html', static_url_path='', static_folder='../static')
 
-messages = []
+messages = [
+    # { 'message': 'test message'}
+]
+
+def save_to_file(messages):
+    with open("data/messagebank.json", "w") as f:
+        f.write(json.dumps(messages))
+        
+
+def load_from_file():
+    with open("data/messagebank.json", "r") as f:
+        json_string = f.read()
+        return json.loads(json_string)
+
+
+messages = load_from_file()
+print('messages', messages)
+messages.append({ 'message': 'test message2'})
+save_to_file(messages)
+
 
 @app.route('/')
 def index():
@@ -47,9 +66,6 @@ def contact():
     return render_template('contact.html')
 
 
-@app.route('/hello')
-def hello():
-    return render_template('index.html', content='test')
 
 
 if __name__ == '__main__':
