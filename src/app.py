@@ -19,14 +19,58 @@ def load_from_file():
         return json.loads(json_string)
 
 
+def get_next_slot(messages):
+    last_message = messages and messages[-1] or 0
+    if last_message:
+        slot = last_message['slot']
+        if slot == 96:
+            return 1
+        
+        return slot + 1
+    else:
+        return 1
+
+
+# return a slot between 0 and 49 based on the 15 minute intervals of the day
+def get_slot_for_current_time():
+    hour = int(datetime.now().strftime('%H'))
+    minute = int(datetime.now().strftime('%M'))
+    slot = (hour * 4)
+    if minute < 15:
+        slot = slot
+    elif minute < 30:
+        slot = slot +1
+    elif minute < 45:
+        slot = slot + 2
+    else:
+        slot = slot + 3
+    return slot 
+
+
+def get_message_for_current_time():
+    slot = get_slot_for_current_time()
+    for i in range(len(messages) -1, -1, -1):
+        message = messages[i]
+        if message['slot'] == slot:
+            return message
+    # if we do not have a message for a slot, return the last message:    
+    return messages[len(messages) -1]    
+    
+
 messages = load_from_file()
 print('messages', messages)
 
 
 @app.route('/')
 def index():
-    return render_template('index.html', content='boo')
+    message = ''
+    content = ''
+    if messages:
+        message = get_message_for_current_time()['message']
+    else:
+        content = "You haven't been sent any bottled messages yet. But you can be the first to send one!"
 
+    return render_template('index.html', content=content, message=message)
 
 @app.route('/submit', methods=['GET', 'POST'])
 def submit():
@@ -40,20 +84,12 @@ def add():
     if content:
         messages.append({
             "message": content,
-            "created_at": int(time.time())
+            "created_at": int(time.time()),
+            'slot': get_next_slot(messages)
         })
         save_to_file(messages)
 
-    return redirect(url_for('receive'))
-
-@app.route('/receive')
-def receive():
-    if messages:
-        message = random.choice(messages)
-    else:
-        message = {"text": "No messages yet. Be the first to send one!"}
-
-    return render_template('receive.html', message=message)
+    return redirect(url_for('index'))
 
 
 @app.route('/about')

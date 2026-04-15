@@ -2,12 +2,12 @@
 
 {% block content %}
 
-<h1>🌊 Message in a Bottle</h1>
+<h1>Message in a Bottle</h1>
 <p>Send anonymous messages and receive inspiration from strangers.</p>
 
 <p>{{content}}</p>
+<p><img src="{{ url_for('static', filename='images/BOTTLEJPEG') }}"> {{message}}</p>
 <a href="/submit"><button>Send a Message</button></a>
-<a href="/receive"><button>Open a Bottle</button></a>
 
 <div id="timer"></div>
 
