@@ -5,9 +5,9 @@
 
 <h2>Send Your Bottle Message</h2>
 
-<form method="POST">
+<form method="POST" action="{{ url_for('add')}}">
     <textarea name="message" placeholder="Write your message..." required></textarea><br>
-    <button type="submit">Send Bottle 🌊</button>
+    <button type="submit">Send Bottle </button>
 </form>
 
 {% endblock %}

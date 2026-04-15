@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-import random, json
+import random, json, time
 from datetime import datetime
 
 app = Flask(__name__, template_folder='../html', static_url_path='', static_folder='../static')
@@ -21,8 +21,6 @@ def load_from_file():
 
 messages = load_from_file()
 print('messages', messages)
-messages.append({ 'message': 'test message2'})
-save_to_file(messages)
 
 
 @app.route('/')
@@ -32,19 +30,21 @@ def index():
 
 @app.route('/submit', methods=['GET', 'POST'])
 def submit():
-    if request.method == 'POST':
-        content = request.form.get('message')
-
-        if content:
-            messages.append({
-                "text": content,
-                "time": datetime.now()
-            })
-
-        return redirect(url_for('receive'))
-
     return render_template('submit.html')
 
+
+@app.route('/add', methods=['POST'])
+def add():
+    content = request.form.get('message')
+
+    if content:
+        messages.append({
+            "message": content,
+            "created_at": int(time.time())
+        })
+        save_to_file(messages)
+
+    return redirect(url_for('receive'))
 
 @app.route('/receive')
 def receive():
