@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for
 import random, json, time
 from datetime import datetime
 
+MAX_MESSAGE_SLOT = 95
+NUMBER_OF_HISTORY = 10
+
 app = Flask(__name__, template_folder='../html', static_url_path='', static_folder='../static')
 
 messages = [
@@ -19,11 +22,32 @@ def load_from_file():
         return json.loads(json_string)
 
 
+def get_last_ten():
+    current_slot = get_slot_for_current_time()
+    end_slot = current_slot - 1
+    if end_slot == -1:
+        end_slot = MAX_MESSAGE_SLOT
+        
+    start_slot = end_slot - NUMBER_OF_HISTORY 
+    if start_slot < 0:
+        start_slot = MAX_MESSAGE_SLOT + start_slot
+    
+    pos = start_slot   
+    display_messages = []
+    while len(display_messages) < 10:
+        display_messages.append(messages[pos])
+        pos = pos + 1
+        if pos == MAX_MESSAGE_SLOT:
+            pos = 0
+    return display_messages 
+    
+                   
+
 def get_next_slot(messages):
     last_message = messages and messages[-1] or 0
     if last_message:
         slot = last_message['slot']
-        if slot == 95:
+        if slot == MAX_MESSAGE_SLOT:
             return 0
         
         return slot + 1
@@ -58,7 +82,7 @@ def get_message_for_current_time():
     
 
 messages = load_from_file()
-print('messages', messages)
+# print('messages', messages)
 
 
 @app.route('/')
@@ -97,11 +121,19 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return render_template('contact.html')
+    if request.method == 'GET':   
+        return render_template('contact.html')
+    name = request.form['name']
+    return render_template('contact_result.html', name = name)
 
-
+@app.route('/history')
+def history():
+    print('reached')
+    messages_to_display = get_last_ten()
+    print(messages_to_display)
+    return render_template('history.html', messages=messages_to_display)
 
 
 if __name__ == '__main__':

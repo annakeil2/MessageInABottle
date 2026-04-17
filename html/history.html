@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>History of Bottled Messages</h2>
+<p>Last 10 messages sent</p>
+
+<ol>
+{% for message in messages %}
+<li>
+    {{ message.message }}
+</li>
+{% endfor %}
+</ol>
+
+{% endblock %}
