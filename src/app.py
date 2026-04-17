@@ -23,15 +23,15 @@ def get_next_slot(messages):
     last_message = messages and messages[-1] or 0
     if last_message:
         slot = last_message['slot']
-        if slot == 96:
-            return 1
+        if slot == 95:
+            return 0
         
         return slot + 1
     else:
-        return 1
+        return 0
 
 
-# return a slot between 0 and 49 based on the 15 minute intervals of the day
+# return a slot between 0 and 95 based on the 15 minute intervals of the day
 def get_slot_for_current_time():
     hour = int(datetime.now().strftime('%H'))
     minute = int(datetime.now().strftime('%M'))
