@@ -21,6 +21,13 @@ nav a {
     font-weight: bold;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+}
+
 textarea, input {
     width: 60%;
     padding: 10px;
@@ -55,4 +62,21 @@ button {
 .bottledmessage {
     font-size: 1.55rem;
     color: #fcf6fe;
+}
+
+.aboutpagetext {
+    max-width: 800px;
+}
+
+form {
+    width: 55%;
+}
+
+ol {
+    text-align: left;
+}
+
+ol li {
+    padding: 8px;
+    color: black;
 }

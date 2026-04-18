@@ -1,15 +1,3 @@
-window.addEventListener("load", () => {
-    const box = document.querySelector(".message-box");
-    if (box) {
-        box.style.opacity = 0;
-        box.style.transition = "opacity 1.5s";
-
-        setTimeout(() => {
-            box.style.opacity = 1;
-        }, 200);
-    }
-});
-
 // Countdown timer
 let seconds = 900;
 
@@ -24,6 +12,6 @@ setInterval(() => {
 
     timer.innerText = `Next bottle in: ${min}:${sec < 10 ? '0' : ''}${sec}`;
 
-    if (seconds <= 0) seconds = 3600;
+    if (seconds <= 0) seconds = 900;
 
 }, 1000);
