@@ -11,7 +11,7 @@ window.addEventListener("load", () => {
 });
 
 // Countdown timer
-let seconds = 3600;
+let seconds = 900;
 
 setInterval(() => {
     const timer = document.getElementById("timer");
